@@ -20,39 +20,43 @@ namespace ARCHIVO
         public String nReservado { get; set; }
 
         public Int16 Tiporegistros;
-        public Registrocontrol CrearRegistroControl(List<Detalle> listaDetalles)
+        public void CrearRegistroControl(List<Detalle> listaDetalles, String fileName)
         {
+
             Registrocontrol regControl = new Registrocontrol();
             Int32 totalfilas = 0;
             Decimal totalvalores = 0;
-            Decimal valores = 0;        
-
+            Decimal valores = 0;
+            String SaveFile = @"D:\Users\maguilarm\source\repos\archivo\archivo\" + fileName+ ".txt";
             for (Int32 i = 0; i < listaDetalles.Count; i++)
             {
                 totalfilas += 1;
                 totalvalores = totalvalores + listaDetalles[i].valorTotalServicioPrincipal;
                 valores = valores + listaDetalles[i].valorTotalServicioAdicional;
+
+                regControl.tipderegistro = 09;
+                regControl.totaldelregistosDetalle = totalfilas;
+                regControl.valorServicioPrincipal = totalvalores;
+                regControl.numtotaldelServicioAdicional = valores;
+                regControl.nReservado = new String(' ', 173);
+
+                if (!File.Exists(SaveFile))
+                {
+                    using (StreamWriter sw = File.CreateText(SaveFile))
+                    {
+                        String registroControl = tipderegistro + totaldelregistosDetalle + valorServicioPrincipal + numtotaldelServicioAdicional + nReservado;
+
+                        sw.WriteLine(registroControl);
+
+                    }
+
+
+
+
+
+                }
+
             }
-            
-
-            regControl.tipderegistro = 09;
-            regControl.totaldelregistosDetalle = totalfilas;
-            regControl.valorServicioPrincipal = totalvalores;
-            regControl.numtotaldelServicioAdicional = valores;
-            regControl.nReservado = new String(' ', 173);
-
-           
-
-
-
-
-
-            
-            return regControl;
-
-
-
-
         }
     }
 }

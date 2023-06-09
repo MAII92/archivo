@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
+using System.ComponentModel;
+using System.Reflection.PortableExecutable;
 
 namespace ARCHIVO
 {
@@ -17,60 +19,49 @@ namespace ARCHIVO
         {
             Encabezado encabezado = new Encabezado();
             Console.WriteLine("cual es nombre del archivo ");
-            string namefile = Console.ReadLine();
-            String path = @"D:\Users\maguilarm\source\repos\archivo\archivo\" + namefile + ".txt";
-            if (!File.Exists(path))
-            {
-                using (StreamWriter sw = File.CreateText(path))
-                {
-                    Encabezado en = encabezado.CrearEncabezado();
+            String fileName = Console.ReadLine();
+            encabezado.CrearEncabezado(fileName);
+   
+            Int32 numRegistros = 0;
+            Console.WriteLine("ingresar numero de registros");
+            numRegistros = Int32.Parse(Console.ReadLine());
+            Detalle detalle = new Detalle();
+            List<Detalle> listaDetalle = new List<Detalle>();
+            detalle.GenerarDetalle(numRegistros,fileName);
+          
 
-                    sw.WriteLine(en.tipoRegistro1 + en.nitFacturadoraPrincipal + en.nitFacturadoraAdicional + en.CodigoEntidadFinanciera + en.horaGeneracionArchivo + en.fechaGeneracionArchivo + en.modificadorArchivo + en.reservado);
-                    Console.ReadLine();
-
-                    Int64 numRegistros = 0;
-                    Console.WriteLine("ingresar numero de registros");
-                    numRegistros = Int64.Parse(Console.ReadLine());
-                    Detalle detalle = new Detalle();
-                    List<Detalle> listaDetalle = new List<Detalle>();
-                    listaDetalle = detalle.GenerarDetalle(numRegistros);
-                    Console.ReadLine();
-
-                    Registrocontrol regControl = new Registrocontrol();
-                    regControl.CrearRegistroControl(listaDetalle);
-                    List<Detalle> detalles = new List<Detalle>();
-                    Console.ReadLine();
-
-                    Registrocontrol reg = new Registrocontrol();
-                    sw.WriteLine(reg.tipderegistro + reg.totaldelregistosDetalle + reg.valorServicioPrincipal + reg.numtotaldelServicioAdicional + regControl.nReservado);
-
-                }
-
-            }
+            Registrocontrol regControl = new Registrocontrol();
+            regControl.CrearRegistroControl(listaDetalle, fileName  );
+            List<Detalle> detalles = new List<Detalle>();
+   
+            Console.WriteLine("Guardar archivo");
 
             
 
 
-           
-
-            //}
-            //  return regControl;/
-
-
-
-
-
-
-
-
-
-
-
         }
-
-
     }
 }
+
+
+
+
+
+
+//}
+//  return regControl;/
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*lista+= TipoRegistro + NumIdentificacion + NumIdentificacionAdicional + CodigoEntidad + Reservado + FechadeGeneracióndeArchivo + Hora + ModificadordelArchivo;//

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -21,11 +22,11 @@ namespace ARCHIVO
         public Decimal valorTotalServicioAdicional { get; set; }
         public DateTime fechaVencimiento { get; set; }
         public String filler { get; set; }
-        public List<Detalle> GenerarDetalle(Int64 numRegistros)
+        public void GenerarDetalle(Int32 numRegistros, String fileName)
         {
             List<Detalle> listaDetalles = new List<Detalle>();
-
-            for (Int16 i = 1; i <= numRegistros; i++)
+            String SaveFile = @"D:\Users\maguilarm\source\repos\archivo\archivo\" + fileName + ".txt";
+            for (Int32 i = 1; i <= numRegistros; i++)
             {
                 Detalle detail = new Detalle();
                 detail.tipoRegistro = 6;
@@ -40,21 +41,21 @@ namespace ARCHIVO
                 detail.fechaVencimiento = DateTime.Now;
                 detail.filler = new String(' ', 86);
                 listaDetalles.Add(detail);
+                
+                if (!File.Exists(SaveFile))
+                {
+                    using (StreamWriter detalle = new StreamWriter(SaveFile))
+                    {
 
-                Detalle detalle = new
+                            String fila = (detail.tipoRegistro + detail.referenciaUsuario + detail.referenciaSecundaria + detail.ciclos + detail.codigoServicio + detail.totalRegistroDetalle + detail.valorTotalServicioPrincipal + detail.valorTotalServicioAdicional + detail.fechaVencimiento + detail.filler);
+                            detalle.WriteLine(fila);
+                    }
 
-               sw.WriteLine(detalle.tipoRegistro+ detalle.referenciaUsuario + detalle.referenciaSecundaria + detalle.ciclos + detalle.codigoServicio + detalle.totalRegistroDetalle + detalle.valorTotalServicioPrincipal + detalle.valorTotalServicioAdicional+ detalle.fechaVencimiento + detalle.filler);
-                Console.ReadLine();
+                }
 
-                String fileName = Console.ReadLine();
-                String SaveFile=@"D:\Users\maguilarm\source\repos\archivo\archivo\" + fileName + ".txt";
 
             }
-            return listaDetalles;
         }
-
-
-
     }
 }
 
