@@ -31,7 +31,8 @@ namespace ARCHIVO
             header.modificadorArchivo = "A";
             header.reservado = new string(' ', 170);
             { 
-                String SaveFile = @"D:\Users\maguilarm\source\repos\archivo\archivo\" + fileName + ".txt";
+                String SaveFile =@"C:\Proyectos\archivo\nuevo_archivo\" + fileName + ".txt";
+
                 if (!File.Exists(SaveFile))
                 {
                     using (StreamWriter sw = new StreamWriter(SaveFile))

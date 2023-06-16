@@ -26,18 +26,22 @@ namespace ARCHIVO
             Console.WriteLine("ingresar numero de registros");
             numRegistros = Int32.Parse(Console.ReadLine());
             Detalle detalle = new Detalle();
-            List<Detalle> listaDetalle = new List<Detalle>();
+            List<Detalle> listaDetalles = new List<Detalle>();
             detalle.GenerarDetalle(numRegistros,fileName);
           
 
             Registrocontrol regControl = new Registrocontrol();
-            regControl.CrearRegistroControl(listaDetalle, fileName  );
+            regControl.CrearRegistroControl(listaDetalles, fileName);
             List<Detalle> detalles = new List<Detalle>();
-   
             Console.WriteLine("Guardar archivo");
 
-            
+            String SaveFile = @"C:\Proyectos\archivo\nuevo_archivo\" + fileName + ".txt";
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.WriteLine(detalleItem.ToString());)
 
+                writer.WriteLine(regControl.ToString());
+            }
 
         }
     }

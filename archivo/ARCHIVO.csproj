@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="C:\Proyectos\archivo\nuevo_archivo\Detalle.cs" Link="Detalle.cs" />
+  </ItemGroup>
+
 </Project>
