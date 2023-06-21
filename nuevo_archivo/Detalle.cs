@@ -18,10 +18,11 @@ namespace ARCHIVO
         public String periodosFacturados { get; set; }
         public String ciclos { get; set; }
         public String codigoServicio { get; set; }
-        public Decimal valorTotalServicioPrincipal { get; set; }
-        public Decimal valorTotalServicioAdicional { get; set; }
-        public DateTime fechaVencimiento { get; set; }
+        public String valorTotalServicioPrincipal { get; set; }
+        public String valorTotalServicioAdicional { get; set; }
+        public String fechaVencimiento { get; set; }
         public String filler { get; set; }
+          
         public List<Detalle> GenerarDetalle(Int32 numRegistros, String fileName1)
         {
             List<Detalle> listaDetalles = new List<Detalle>();
@@ -33,25 +34,27 @@ namespace ARCHIVO
                 detail.referenciaSecundaria = CerosRellenar.Left(RandomNumber.Generar(), 30);
                 detail.periodosFacturados = "01";
                 detail.ciclos = CerosRellenar.Left(i, 3);
+                detail.valorTotalServicioPrincipal =  CerosRellenar.Left (14,10);
                 detail.codigoServicio = CerosRellenar.Left(0, 13);
-                detail.valorTotalServicioPrincipal = (Int32)0000000000000000.23;
-                detail.valorTotalServicioAdicional = (Int32)0000000000000000.63;
-                detail.fechaVencimiento = DateTime.Now;
+                detail.valorTotalServicioAdicional = CerosRellenar.Left(14,0);
+                detail.fechaVencimiento = DateTime.Now.AddDays(new Random().Next(30, 365)).ToString("yyyyMMdd");
                 detail.filler = new String('0', 86);
                 listaDetalles.Add(detail);
                 {
                     String SaveFile = @"C:\Proyectos\archivo\nuevo_archivo\" + fileName1 + ".txt";
-                    
-                        using (StreamWriter detalle = new StreamWriter(SaveFile, true))
-                        {
 
-                          String fila = (detail.tipoRegistro + detail.referenciaUsuario + detail.referenciaSecundaria + detail.ciclos + detail.codigoServicio + detail.valorTotalServicioPrincipal + detail.valorTotalServicioAdicional + detail.fechaVencimiento + detail.filler);
-                          detalle.WriteLine(fila);
-                        }
+                    using (StreamWriter detalle = new StreamWriter(SaveFile, true))
+                    {
 
-                }       
+                        String fila = (detail.tipoRegistro + detail.referenciaUsuario + detail.referenciaSecundaria + detail.ciclos + detail.valorTotalServicioPrincipal + detail.codigoServicio  + detail.valorTotalServicioAdicional + detail.fechaVencimiento + detail.filler);
+                        detalle.WriteLine(fila);
+                    }
+
+                }
             }
-            return listaDetalles;   
+            return listaDetalles;
+
+            
         }
     }
 }

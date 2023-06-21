@@ -2,6 +2,8 @@
 
 public class RandomNumber
 {
+    public static string Tostring { get; internal set; }
+
     public static long Generar()
     {
         Random random = new Random();
