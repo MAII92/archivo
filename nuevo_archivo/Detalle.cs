@@ -37,7 +37,7 @@ namespace ARCHIVO
                 detail.valorTotalServicioPrincipal =  CerosRellenar.Left (14,10);
                 detail.codigoServicio = CerosRellenar.Left(0, 13);
                 detail.valorTotalServicioAdicional = CerosRellenar.Left(14,0);
-                detail.fechaVencimiento = DateTime.Now.AddDays(new Random().Next(30, 365)).ToString("yyyyMMdd");
+                detail.fechaVencimiento = DateTime.Now.AddDays(new Random().Next(1, 31) * -1).AddDays(-30).ToString("yyyyMMdd");
                 detail.filler = new String('0', 86);
                 listaDetalles.Add(detail);
                 {
