@@ -1,11 +1,13 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace ARCHIVO
 {
@@ -29,19 +31,19 @@ namespace ARCHIVO
             for (Int32 i = 0; i < numRegistros; i++)
             {
                 Detalle detail = new Detalle();
-                detail.tipoRegistro = CerosRellenar.Left(6, 2);
+                detail.tipoRegistro = CerosRellenar.Left(6,2);
                 detail.referenciaUsuario = CerosRellenar.Left(RandomNumber.Generar(), 48);
                 detail.referenciaSecundaria = CerosRellenar.Left(RandomNumber.Generar(), 30);
                 detail.periodosFacturados = "01";
-                detail.ciclos = CerosRellenar.Left(i, 3);
-                detail.valorTotalServicioPrincipal =  CerosRellenar.Left (14,10);
+                detail.ciclos = "002";
+                detail.valorTotalServicioPrincipal =  CerosRellenar.Left (14,0);
                 detail.codigoServicio = CerosRellenar.Left(0, 13);
                 detail.valorTotalServicioAdicional = CerosRellenar.Left(14,0);
                 detail.fechaVencimiento = DateTime.Now.AddDays(new Random().Next(1, 31) * -1).AddDays(-30).ToString("yyyyMMdd");
                 detail.filler = new String('0', 86);
                 listaDetalles.Add(detail);
                 {
-                    String SaveFile = @"C:\Proyectos\archivo\nuevo_archivo\" + fileName1 + ".txt";
+                   String SaveFile = fileName1 + ".txt";
 
                     using (StreamWriter detalle = new StreamWriter(SaveFile, true))
                     {

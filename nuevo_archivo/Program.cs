@@ -35,6 +35,7 @@ namespace ARCHIVO
             List<Detalle> detalles= new List<Detalle>();
             Console.WriteLine("Guardar archivo");
 
+            FileManager content = new FileManager();      
 
         }
 }   }

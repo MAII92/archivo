@@ -19,7 +19,7 @@ namespace ARCHIVO
         public String valorServicioPrincipal { get; set; }
         public String valorTotalServicioAdicional { get; set; }
         public String nReservado { get; set; }
-        public void CrearRegistroControl(List<Detalle>  listaDetalles, String fileName2)
+        public void CrearRegistroControl(List<Detalle>  listaDetalles, String fileName)
         {
 
             Int32 totalfilas = 0;
@@ -28,23 +28,19 @@ namespace ARCHIVO
             Int32 totalDetalles = listaDetalles.Count;
             foreach (var item in listaDetalles)
             {
-
                 totalfilas += 1;
-                totalvalores = Convert.ToDecimal (this.valorServicioPrincipal);
-                totalvalores = totalvalores  + Convert.ToDecimal(item.valorTotalServicioPrincipal);
-                valores = Convert.ToDecimal(this.valorTotalServicioAdicional);
-                valores = valores +Convert.ToDecimal(item.valorTotalServicioAdicional);       
-
+                totalvalores = totalvalores + Convert.ToDecimal(item.valorTotalServicioPrincipal);
+                valores = valores +Convert.ToDecimal(item.valorTotalServicioAdicional);      
             }
 
             Registrocontrol regControl = new Registrocontrol();
             regControl.tipderegistro = "09";
             regControl.totaldelregistosDetalle = totalfilas.ToString().PadLeft(9, '0');//sirve de relleno para los caracteres restantes 
-            regControl.valorServicioPrincipal = totalvalores.ToString().PadLeft(18, '0');
-            regControl.valorTotalServicioAdicional = valores.ToString().PadLeft(18, '0');
+            regControl.valorServicioPrincipal = totalvalores.ToString().PadLeft(16, '0');
+            regControl.valorTotalServicioAdicional = valores.ToString().PadLeft(16, '0');
             regControl.nReservado = new String(' ', 173);
 
-            String SaveFile = @"C:\Proyectos\archivo\nuevo_archivo\" + fileName2 + ".txt";
+            String SaveFile = fileName+ ".txt";
 
             using (StreamWriter sw = new StreamWriter(SaveFile, true))
             {

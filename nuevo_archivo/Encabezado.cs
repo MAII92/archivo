@@ -23,25 +23,15 @@ namespace ARCHIVO
         {
             Encabezado header = new Encabezado();
             header.tipoRegistro1 = "01";
-            header.nitFacturadoraPrincipal = CerosRellenar.Left(RandomNumber.Generar(), 12);
-            header.nitFacturadoraAdicional = CerosRellenar.Left(RandomNumber.Generar(), 12);
-            header.CodigoEntidadFinanciera = CerosRellenar.Left(RandomNumber.Generar() * 1000000 , 3);     
+            header.nitFacturadoraPrincipal = RandomNumber.Generar().ToString().PadLeft(16, '0');
+            header.nitFacturadoraAdicional = RandomNumber.Generar().ToString().PadLeft(16, '0');
+            header.CodigoEntidadFinanciera = CerosRellenar.Left(RandomNumber.Generar() * 0, 3);     
             header.fechaGeneracionArchivo = DateTime.Now.ToString("yyyyMMdd");
             header.horaGeneracionArchivo = DateTime.Now.ToString("HHmm");
             header.modificadorArchivo = "A";
             header.reservado = new string(' ', 170);
-            { 
-                String SaveFile = @"C:\Proyectos\archivo\nuevo_archivo\" + fileName + ".txt";
-                if (!File.Exists(SaveFile))
-                {
-                    using (StreamWriter sw = new StreamWriter(SaveFile))
-                    {
-
-                        String encabezados = (header.tipoRegistro1 + header.nitFacturadoraPrincipal + header.nitFacturadoraAdicional + header.CodigoEntidadFinanciera  + header.fechaGeneracionArchivo + header.horaGeneracionArchivo +header.modificadorArchivo + header.reservado);
-                         sw.WriteLine(encabezados);
-                    }
-
-                }
+            {
+                FileManager.SaveFile('')
             }
             
                 return header;
