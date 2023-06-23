@@ -27,7 +27,7 @@ namespace ARCHIVO
             numRegistros = Int32.Parse(Console.ReadLine());
             Detalle detalle = new Detalle();
             List<Detalle> listaDetalles = new List<Detalle>();
-            listaDetalles=detalle.GenerarDetalle(numRegistros, fileName);
+            detalle.GenerarDetalle(numRegistros, fileName);
 
       
             Registrocontrol regControl = new Registrocontrol();
@@ -35,7 +35,7 @@ namespace ARCHIVO
             List<Detalle> detalles= new List<Detalle>();
             Console.WriteLine("Guardar archivo");
 
-            FileManager content = new FileManager();      
+             
 
         }
 }   }
