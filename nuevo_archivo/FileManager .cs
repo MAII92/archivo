@@ -21,21 +21,7 @@ namespace ARCHIVO
             {
                 sw.WriteLine(content);
             }
-                Encabezado header = new Encabezado();
 
-                String encabezados = header.tipoRegistro1 + header.nitFacturadoraPrincipal + header.nitFacturadoraAdicional + header.CodigoEntidadFinanciera + header.fechaGeneracionArchivo + header.horaGeneracionArchivo + header.modificadorArchivo + header.reservado;
-                FileManager.SaveFile(content,encabezados);  
-            
-
-                Detalle detail = new Detalle();
-                String fila= detail.tipoRegistro + detail.referenciaUsuario + detail.referenciaSecundaria + detail.ciclos + detail.valorTotalServicioPrincipal + detail.codigoServicio + detail.valorTotalServicioAdicional + detail.fechaVencimiento + detail.filler;
-                FileManager.SaveFile(content, fila); 
-
-                Registrocontrol regControl = new Registrocontrol();
-                String registroControl = regControl.tipderegistro + regControl.totaldelregistosDetalle + regControl.valorServicioPrincipal + regControl.nReservado;
-                FileManager.SaveFile(content, registroControl);    
-                
-            
            
     }   }  
 }

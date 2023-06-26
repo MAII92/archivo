@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.ComponentModel;
 using System.Reflection.PortableExecutable;
+using System.Net.NetworkInformation;
 
 namespace ARCHIVO
 {
@@ -19,19 +20,19 @@ namespace ARCHIVO
         {
             Encabezado encabezado = new Encabezado();
             Console.WriteLine("cual es nombre del archivo ");
-            String fileName = Console.ReadLine();
-            encabezado.CrearEncabezado(fileName);
+            String SaveFile  = Console.ReadLine();
+            encabezado.CrearEncabezado(SaveFile);
 
             Int32 numRegistros = 0;
             Console.WriteLine("ingresar numero de registros");
             numRegistros = Int32.Parse(Console.ReadLine());
             Detalle detalle = new Detalle();
             List<Detalle> listaDetalles = new List<Detalle>();
-            detalle.GenerarDetalle(numRegistros, fileName);
+            detalle.GenerarDetalle(numRegistros, SaveFile);
 
       
             Registrocontrol regControl = new Registrocontrol();
-            regControl.CrearRegistroControl(listaDetalles, fileName);
+            regControl.CrearRegistroControl(listaDetalles, SaveFile);
             List<Detalle> detalles= new List<Detalle>();
             Console.WriteLine("Guardar archivo");
 

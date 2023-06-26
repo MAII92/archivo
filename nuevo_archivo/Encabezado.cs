@@ -32,13 +32,9 @@ namespace ARCHIVO
             header.modificadorArchivo = "A";
             header.reservado = new string(' ', 170);
 
-            {
-                String SaveFile = fileName + ".txt";
-                String encabezados = ( header.tipoRegistro1 + header.nitFacturadoraPrincipal + header.nitFacturadoraAdicional + header.CodigoEntidadFinanciera + header.fechaGeneracionArchivo + header.horaGeneracionArchivo + header.modificadorArchivo + header.reservado);
-                
-
-            }
-
+            FileManager fileManager = new FileManager();
+            String encabezados = ( header.tipoRegistro1 + header.nitFacturadoraPrincipal + header.nitFacturadoraAdicional + header.CodigoEntidadFinanciera + header.fechaGeneracionArchivo + header.horaGeneracionArchivo + header.modificadorArchivo + header.reservado);
+            FileManager.SaveFile(fileName, encabezados);
             return header;
 
 }   }   }

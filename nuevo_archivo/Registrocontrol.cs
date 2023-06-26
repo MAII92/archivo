@@ -32,19 +32,32 @@ namespace ARCHIVO
                 totalvalores = totalvalores + Convert.ToDecimal(item.valorTotalServicioPrincipal);
                 valores = valores + Convert.ToDecimal(item.valorTotalServicioAdicional);
             }
+            Decimal GenerarDecimal()
+            {
+                Random rnd = new Random();
+                Int32 valorEntero = rnd.Next(1000000, 10000000);
+                Decimal valorDecimal = rnd.Next(0, 10000) / 100m;
+                Decimal val = new Decimal(valorEntero) + valorDecimal;
+                return val;
+            }
+
+             Decimal valorPrincipalAleatorio = GenerarDecimal();
+              Decimal valorAdicionalAleatorio = GenerarDecimal();
 
             Registrocontrol regControl = new Registrocontrol();
             regControl.tipderegistro = "09";
-            regControl.totaldelregistosDetalle = totalfilas.ToString().PadLeft(9, '0');//sirve de relleno para los caracteres restantes 
-            regControl.valorServicioPrincipal = totalvalores.ToString().PadLeft(16, '0');
-            regControl.valorTotalServicioAdicional = valores.ToString().PadLeft(16, '0');
+            regControl.totaldelregistosDetalle = totalfilas.ToString().PadLeft(9, '0');
+            regControl.valorServicioPrincipal = valorPrincipalAleatorio.ToString("00000000000000").PadLeft(16, '0');
+            regControl.valorTotalServicioAdicional = valorAdicionalAleatorio.ToString("00000000000000").PadLeft(16, '0');
             regControl.nReservado = new String(' ', 173);
 
 
-            String SaveFile = fileName + ".txt";
-            String registroControl = regControl.tipderegistro + regControl.totaldelregistosDetalle + regControl.valorServicioPrincipal + regControl.nReservado;
-            
+            FileManager fileManager = new FileManager();
+            string SaveFile = fileName + ".txt";
 
+            String registroControl = regControl.tipderegistro + regControl.totaldelregistosDetalle + regControl.valorServicioPrincipal + regControl.nReservado;
+
+            FileManager.SaveFile(fileName, registroControl);
         }
     }
 

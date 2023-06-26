@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace ARCHIVO
                 detail.tipoRegistro = CerosRellenar.Left(6, 2);
                 detail.referenciaUsuario = CerosRellenar.Left(RandomNumber.Generar(), 48);
                 detail.referenciaSecundaria = CerosRellenar.Left(RandomNumber.Generar(), 30);
-                detail.periodosFacturados = "01";
+                detail.periodosFacturados = "01" + CerosRellenar.Left(0, 1);
                 detail.ciclos = "002";
                 detail.valorTotalServicioPrincipal = CerosRellenar.Left(14, 0);
                 detail.codigoServicio = CerosRellenar.Left(0, 13);
@@ -43,15 +44,21 @@ namespace ARCHIVO
                 detail.filler = new String('0', 86);
                 listaDetalles.Add(detail);
 
+                FileManager fileManager = new FileManager();
+                String SaveFile = fileName + ".txt";
+
+
                 foreach (var de in listaDetalles)
                 {
                     String fila = detail.tipoRegistro + detail.referenciaUsuario + detail.referenciaSecundaria + detail.ciclos + detail.valorTotalServicioPrincipal + detail.codigoServicio + detail.valorTotalServicioAdicional + detail.fechaVencimiento + detail.filler;
-                    
+
+                    FileManager.SaveFile(fileName,fila);
                 }
             }
         }
     }
-    
+
+}
         
    
 
