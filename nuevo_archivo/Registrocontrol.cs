@@ -41,8 +41,8 @@ namespace ARCHIVO
                 return val;
             }
 
-             Decimal valorPrincipalAleatorio = GenerarDecimal();
-              Decimal valorAdicionalAleatorio = GenerarDecimal();
+            Decimal valorPrincipalAleatorio = GenerarDecimal();
+            Decimal valorAdicionalAleatorio = GenerarDecimal();
 
             Registrocontrol regControl = new Registrocontrol();
             regControl.tipderegistro = "09";
@@ -51,8 +51,21 @@ namespace ARCHIVO
             regControl.valorTotalServicioAdicional = valorAdicionalAleatorio.ToString("00000000000000").PadLeft(16, '0');
             regControl.nReservado = new String(' ', 173);
 
+            Decimal valorServicioPrincipal = 0;
+            Decimal valorTotalServicioAdicional = 0;
+
+            foreach (var detail in listaDetalles)
+            {
+                valorServicioPrincipal += Convert.ToDecimal(detail.valorTotalServicioPrincipal);
+                valorTotalServicioAdicional += Convert.ToDecimal(detail.valorTotalServicioAdicional);
+            }
+
+            regControl.valorServicioPrincipal += valorServicioPrincipal.ToString("00000000000000").PadLeft(16, '0');
+            regControl.valorTotalServicioAdicional += valorTotalServicioAdicional.ToString("00000000000000").PadLeft(16, '0');
+      
 
             FileManager fileManager = new FileManager();
+
             string SaveFile = fileName + ".txt";
 
             String registroControl = regControl.tipderegistro + regControl.totaldelregistosDetalle + regControl.valorServicioPrincipal + regControl.nReservado;

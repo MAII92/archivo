@@ -29,6 +29,16 @@ namespace ARCHIVO
         public void GenerarDetalle(Int32 numRegistros, String fileName)
         {
             List<Detalle> listaDetalles = new List<Detalle>();
+
+            Decimal GenerarDecimal()
+            {
+                Random rnd = new Random();
+                Int32 valorEntero = rnd.Next(1000000, 10000000);
+                Decimal valorDecimal = rnd.Next(0, 10000) / 100m;
+                Decimal val = new Decimal(valorEntero) + valorDecimal;
+                return val;
+            }
+
             for (Int32 i = 0; i < numRegistros; i++)
             {
                 Detalle detail = new Detalle();
@@ -37,28 +47,33 @@ namespace ARCHIVO
                 detail.referenciaSecundaria = CerosRellenar.Left(RandomNumber.Generar(), 30);
                 detail.periodosFacturados = "01" + CerosRellenar.Left(0, 1);
                 detail.ciclos = "002";
-                detail.valorTotalServicioPrincipal = CerosRellenar.Left(14, 0);
                 detail.codigoServicio = CerosRellenar.Left(0, 13);
-                detail.valorTotalServicioAdicional = CerosRellenar.Left(14, 0);
+
+                Decimal valorPrincipalAleatorio = GenerarDecimal();
+                Decimal valorAdicionalAleatorio = GenerarDecimal();
+
+                detail.valorTotalServicioPrincipal = valorPrincipalAleatorio.ToString("00000000000000").PadLeft(14, '0');
+                detail.valorTotalServicioAdicional = valorAdicionalAleatorio.ToString("00000000000000").PadLeft(14, '0');
                 detail.fechaVencimiento = DateTime.Now.AddDays(new Random().Next(1, 31) * -1).AddDays(-30).ToString("yyyyMMdd");
                 detail.filler = new String('0', 86);
+
                 listaDetalles.Add(detail);
+            }
 
-                FileManager fileManager = new FileManager();
-                String SaveFile = fileName + ".txt";
+            FileManager fileManager = new FileManager();
+            String SaveFile = fileName + ".txt";
 
+            foreach (var detail in listaDetalles)
+            {
+                String fila = detail.tipoRegistro + detail.referenciaUsuario + detail.referenciaSecundaria + detail.ciclos + detail.valorTotalServicioPrincipal + detail.codigoServicio + detail.valorTotalServicioAdicional + detail.fechaVencimiento + detail.filler;
 
-                foreach (var de in listaDetalles)
-                {
-                    String fila = detail.tipoRegistro + detail.referenciaUsuario + detail.referenciaSecundaria + detail.ciclos + detail.valorTotalServicioPrincipal + detail.codigoServicio + detail.valorTotalServicioAdicional + detail.fechaVencimiento + detail.filler;
-
-                    FileManager.SaveFile(fileName,fila);
-                }
+                FileManager.SaveFile(fileName, fila);
             }
         }
     }
+}   
 
-}
+
         
    
 

@@ -26,7 +26,7 @@ namespace ARCHIVO
             header.tipoRegistro1 = "01";
             header.nitFacturadoraPrincipal = RandomNumber.Generar().ToString().PadLeft(16, '0');
             header.nitFacturadoraAdicional = RandomNumber.Generar().ToString().PadLeft(16, '0');
-            header.CodigoEntidadFinanciera = CerosRellenar.Left(RandomNumber.Generar() * 0, 3);
+            header.CodigoEntidadFinanciera = CerosRellenar.Left(RandomNumber.Generar(), 3);
             header.fechaGeneracionArchivo = DateTime.Now.ToString("yyyyMMdd");
             header.horaGeneracionArchivo = DateTime.Now.ToString("HHmm");
             header.modificadorArchivo = "A";
