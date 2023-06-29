@@ -34,6 +34,7 @@ namespace ARCHIVO
                 String SaveFile =@"C:\Proyectos\archivo\nuevo_archivo\" + fileName + ".txt";
 
                 if (!File.Exists(SaveFile))
+                string content = "Este es el contenido del archivo.";
                 {
                     using (StreamWriter sw = new StreamWriter(SaveFile))
                     {

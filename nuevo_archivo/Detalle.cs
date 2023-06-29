@@ -1,14 +1,11 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Net.WebRequestMethods;
 
 namespace ARCHIVO
 {
@@ -16,7 +13,7 @@ namespace ARCHIVO
     {
         public String tipoRegistro { get; set; }
         public String referenciaUsuario { get; set; }
-        public String referenciaSecundaria { get; set; }
+        public String referenciaSecundaria { get; set; } 
         public Int32 reservadoControl { get; set; }
         public String periodosFacturados { get; set; }
         public String ciclos { get; set; }
@@ -25,19 +22,9 @@ namespace ARCHIVO
         public String valorTotalServicioAdicional { get; set; }
         public String fechaVencimiento { get; set; }
         public String filler { get; set; }
-
-        public void GenerarDetalle(Int32 numRegistros, String fileName)
+        public List<Detalle> GenerarDetalle(Int32 numRegistros, String fileName)
         {
             List<Detalle> listaDetalles = new List<Detalle>();
-
-            Decimal GenerarDecimal()
-            {
-                Random rnd = new Random();
-                Int32 valorEntero = rnd.Next(1000000, 10000000);
-                Decimal valorDecimal = rnd.Next(0, 10000) / 100m;
-                Decimal val = new Decimal(valorEntero) + valorDecimal;
-                return val;
-            }
 
             for (Int32 i = 0; i < numRegistros; i++)
             {
@@ -69,13 +56,30 @@ namespace ARCHIVO
 
                 FileManager.SaveFile(fileName, fila);
             }
+            return listaDetalles;
+
+            Decimal GenerarDecimal()
+            {
+                Random rnd = new Random();
+                Int32 valorEntero = rnd.Next(1000000, 10000000);
+                Decimal valorDecimal = rnd.Next(0, 10000) / 100m;
+                Decimal val = new Decimal(valorEntero) + valorDecimal;
+                return val;
+            }
+
         }
+
+       
+
     }
-}   
+}
 
 
+
+            
         
-   
+    
+
 
 
 

@@ -27,10 +27,10 @@ namespace ARCHIVO
             Console.WriteLine("ingresar numero de registros");
             numRegistros = Int32.Parse(Console.ReadLine());
             Detalle detalle = new Detalle();
-            List<Detalle> listaDetalles = new List<Detalle>();
-            detalle.GenerarDetalle(numRegistros, SaveFile);
+            List<Detalle> listaDetalles = detalle.GenerarDetalle(numRegistros, SaveFile);
 
-      
+
+
             Registrocontrol regControl = new Registrocontrol();
             regControl.CrearRegistroControl(listaDetalles, SaveFile);
             List<Detalle> detalles= new List<Detalle>();
