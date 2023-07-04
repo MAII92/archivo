@@ -36,6 +36,7 @@ namespace ARCHIVO
                 detail.ciclos = "002";
                 detail.codigoServicio = CerosRellenar.Left(0, 13);
 
+
                 Decimal valorPrincipalAleatorio = RandomNumber.GenerarDecimal();
                 Decimal valorAdicionalAleatorio = RandomNumber.GenerarDecimal();
 
@@ -58,18 +59,8 @@ namespace ARCHIVO
             }
             return listaDetalles;
 
-            Decimal GenerarDecimal()
-            {
-                Random rnd = new Random();
-                Int32 valorEntero = rnd.Next(1000000, 10000000);
-                Decimal valorDecimal = rnd.Next(0, 10000) / 100m;
-                Decimal val = new Decimal(valorEntero) + valorDecimal;
-                return val;
-            }
-
+           
         }
-
-       
 
     }
 }

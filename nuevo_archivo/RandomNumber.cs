@@ -29,7 +29,7 @@ public class RandomNumber
         Random random = new Random();
         StringBuilder output = new StringBuilder();
 
-        for (Decimal i = 0; i < codeLength; i++)
+        for (Int32 i = 0; i < codeLength; i++)
         {
             output.Append(random.Next(0, 10));
         }
