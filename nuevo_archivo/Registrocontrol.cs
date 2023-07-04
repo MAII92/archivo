@@ -26,18 +26,18 @@ namespace ARCHIVO
             Decimal totalvalores = 0;
             Decimal valores = 0;
             Int32 totalDetalles = listaDetalles.Count;
-            Decimal valorServicioPrincipal = 0;
-            Decimal valorServicioAdicional = 0;
+            Decimal valorTotalServicioPrincipal = 0;
+            Decimal valorTotalServicioAdicional = 0;
             foreach (var item in listaDetalles)
             {
                 totalfilas += 1;
-                valorServicioPrincipal += Convert.ToDecimal(item.valorTotalServicioPrincipal);
-                valorServicioAdicional += Convert.ToDecimal(item.valorTotalServicioAdicional);
+                totalvalores = totalvalores + Convert.ToDecimal(item.valorTotalServicioPrincipal);
+                 valores =valores + Convert.ToDecimal(item.valorTotalServicioAdicional);
             }
 
 
-            Decimal valorTotalServicioPrincipal = valorServicioPrincipal;
-            Decimal valorTotalServicioAdicional = valorServicioAdicional;
+           valorTotalServicioPrincipal = totalvalores; 
+           valorTotalServicioAdicional = valores;    
 
             Registrocontrol regControl = new Registrocontrol();
             regControl.tipderegistro = "09";

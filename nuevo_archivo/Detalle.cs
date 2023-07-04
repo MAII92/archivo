@@ -32,16 +32,16 @@ namespace ARCHIVO
                 detail.tipoRegistro = CerosRellenar.Left(6, 2);
                 detail.referenciaUsuario = CerosRellenar.Left(RandomNumber.Generar(), 48);
                 detail.referenciaSecundaria = CerosRellenar.Left(RandomNumber.Generar(), 30);
-                detail.periodosFacturados = "01" + CerosRellenar.Left(0, 1);
+                detail.periodosFacturados = "01";
                 detail.ciclos = "002";
                 detail.codigoServicio = CerosRellenar.Left(0, 13);
 
 
                 Decimal valorPrincipalAleatorio = RandomNumber.GenerarDecimal();
-                Decimal valorAdicionalAleatorio = RandomNumber.GenerarDecimal();
+                Decimal valorAdicionalAleatorio1 = RandomNumber.GenerarDecimal();
 
                 detail.valorTotalServicioPrincipal = valorPrincipalAleatorio.ToString("00000000000000").PadLeft(14, '0');
-                detail.valorTotalServicioAdicional = valorAdicionalAleatorio.ToString("00000000000000").PadLeft(14, '0');
+                detail.valorTotalServicioAdicional = valorAdicionalAleatorio1.ToString("00000000000000").PadLeft(14, '0');
                 detail.fechaVencimiento = DateTime.Now.AddDays(new Random().Next(1, 31) * -1).AddDays(-30).ToString("yyyyMMdd");
                 detail.filler = new String('0', 86);
 
@@ -53,7 +53,7 @@ namespace ARCHIVO
 
             foreach (var detail in listaDetalles)
             {
-                String fila = detail.tipoRegistro + detail.referenciaUsuario + detail.referenciaSecundaria + detail.ciclos + detail.valorTotalServicioPrincipal + detail.codigoServicio + detail.valorTotalServicioAdicional + detail.fechaVencimiento + detail.filler;
+                String fila = detail.tipoRegistro + detail.referenciaUsuario + detail.referenciaSecundaria + detail.periodosFacturados + detail.ciclos + detail.valorTotalServicioPrincipal + detail.codigoServicio + detail.valorTotalServicioAdicional + detail.fechaVencimiento + detail.filler;
 
                 FileManager.SaveFile(fileName, fila);
             }
