@@ -29,8 +29,6 @@ namespace ARCHIVO
             Detalle detalle = new Detalle();
             List<Detalle> listaDetalles = detalle.GenerarDetalle(numRegistros, SaveFile);
 
-
-
             Registrocontrol regControl = new Registrocontrol();
             regControl.CrearRegistroControl(listaDetalles, SaveFile);
             List<Detalle> detalles= new List<Detalle>();
